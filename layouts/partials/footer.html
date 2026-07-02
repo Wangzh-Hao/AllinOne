@@ -42,8 +42,9 @@
     {{ end }}
 
     {{ if and $.Site.Params.i18n_flags $.IsTranslated }}
+        {{ $flagsBase := "img/flags/" | absURL }}
         {{ range .Translations }}
-            <a href="{{ .Permalink }}"><img class="icon flag mr-3" src="{{ $.Site.BaseURL }}img/flags/{{ $.Lang }}.svg"></a>
+            <a href="{{ .Permalink }}"><img class="icon flag mr-3" src="{{ $flagsBase }}{{ .Language.Lang }}.svg" alt="{{ .Language.Label }}"></a>
         {{ end }}
     {{ end }}
 

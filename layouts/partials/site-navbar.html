@@ -34,6 +34,37 @@
           {{ end }}
         </ul>
 
+        {{ if hugo.IsMultilingual }}
+        <!-- Language Switcher -->
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <img src="{{ "img/flags/" | absURL }}{{ .Language.Lang }}.svg" alt="{{ .Language.Label }}" style="width: 22px; height: 16px;">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              {{ $currentPage := . }}
+              {{ range $.Site.Home.AllTranslations }}
+                {{ $targetLang := .Language.Lang }}
+                {{ $targetURL := .Permalink }}
+                {{ if eq $targetLang $currentPage.Language.Lang }}
+                  {{ $targetURL = $currentPage.Permalink }}
+                {{ else }}
+                  {{ range $currentPage.Translations }}
+                    {{ if eq .Language.Lang $targetLang }}
+                      {{ $targetURL = .Permalink }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+                <a class="dropdown-item" href="{{ $targetURL }}">
+                  <img class="mr-2" src="{{ "img/flags/" | absURL }}{{ .Language.Lang }}.svg" alt="{{ .Language.Label }}" style="width: 22px; height: 16px;">
+                  {{ .Language.Label }}
+                </a>
+              {{ end }}
+            </div>
+          </li>
+        </ul>
+        {{ end }}
+
       </div>
 
     </div>
