@@ -91,11 +91,9 @@
             <strong>{{ $.Site.Params.author }}</strong>
           </h1>
         </a>
-        {{ range $.Site.Params.description }}
         <p class="mb-0 p" style="font-size: 1.250rem; font-weight: 200;">
-            {{ . }}
+            {{ $.Site.Params.description }}
         </p>
-        {{ end }}
         <!-- /.Description -->
 
         <!-- Ref Icon -->
@@ -132,8 +130,8 @@
                 <a href="mailto:{{ $.Site.Params.email }}"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
             {{ end }}
     
-            {{ if and $.Site.Params.include_rss $.RSSLink }}
-                <a href="{{ $.RSSLink }}"><i class="fas fa-rss pr-1" aria-hidden="true"></i></a>
+            {{ if $.Site.Params.include_rss }}
+                <a href="{{ "index.xml" | absURL }}"><i class="fas fa-rss pr-1" aria-hidden="true"></i></a>
             {{ end }}
 
         </div>
